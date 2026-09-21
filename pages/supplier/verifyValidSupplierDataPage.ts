@@ -18,7 +18,7 @@ export class verifyValidSupplierData {
         this.btnRevalidateRow = page.getByRole('button', { name: 'Revalidate row' });
         this.btnImportOneRow = page.getByRole('button', { name: 'Import 1 Row' });
         this.btnDone = page.getByRole('button', { name: 'Done' });
-        this.toastSupplierImported = page.getByRole('alert').filter({ hasText: '1 supplier imported as Draft.'});
+        this.toastSupplierImported = page.getByRole('alert').filter({ hasText: '1 supplier imported as Draft.' });
     }
     async clickEditRow2() {
         await this.btnEditRow2.click();
@@ -39,10 +39,10 @@ export class verifyValidSupplierData {
         await this.btnDone.click();
     }
     async verifySupplierImportedMessage() {
-    await expect(this.toastSupplierImported).toContainText(
-        '1 supplier imported as Draft.'
-    );
-}
+        await expect(this.toastSupplierImported).toContainText(
+            '1 supplier imported as Draft.'
+        );
+    }
 }
 
 
