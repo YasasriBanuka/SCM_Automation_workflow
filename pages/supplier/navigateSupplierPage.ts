@@ -32,4 +32,5 @@ export class navigateSupplierPage {
     async clickExport() {
         await  this.btnExportSupplier.click();
     }
+    
 }
