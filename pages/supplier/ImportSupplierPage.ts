@@ -12,7 +12,6 @@ export class importSupplier {
         this.btnDownloadTemplate = page.getByRole('button', { name: 'Download Template' });
         this.fileUpload = page.locator('input[type="file"]');
         this.btnUploadPreview = page.getByRole('button', { name: 'Upload & Preview' });
-
     }
 
     async clickDownloadTemplate() {
