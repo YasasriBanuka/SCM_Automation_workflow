@@ -73,12 +73,8 @@ test('TC_002 : Verify that the admin can successfully add a new supplier using v
     );
 
     await addsupplierData.clickSaveSupplier();
-
     // verification
     await addsupplierData.verifySupplierSavedMessage();
 
-
     await page.waitForTimeout(4000);
-
-
 });
