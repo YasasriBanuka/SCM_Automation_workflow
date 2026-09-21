@@ -83,7 +83,6 @@ test.describe('Admin Login Tests', () => {
         await adminLogin.selectBranch();
         await adminLogin.clickcheckbox();
         await adminLogin.clickLogin();
-
     });
 
 });
