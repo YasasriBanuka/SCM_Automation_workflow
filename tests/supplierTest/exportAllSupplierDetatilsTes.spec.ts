@@ -12,7 +12,7 @@ test('TC_008 : Verify that the admin can successfully export all supplier detail
     await adminLogin.selectBranch();
     await adminLogin.clickcheckbox();
     await adminLogin.clickLogin();
-
+    
     // Supplier Navigation and Form Interaction Automation
     const supplierPage = new navigateSupplierPage(page);
     await supplierPage.clickLblSupplier();
