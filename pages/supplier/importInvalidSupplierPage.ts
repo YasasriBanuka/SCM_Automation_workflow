@@ -28,6 +28,7 @@ export class verifyInValidSupplierData {
         await expect( this.txtImportWarning).toContainText(
             '1 row will be skipped — only 0 rows will be imported. Use the pencil icon to fix a row and re-validate it.'
         );
+        
     }
 
     async reCompanyName(
