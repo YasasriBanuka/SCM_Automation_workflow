@@ -29,5 +29,6 @@ export class archivedSupplierPage {
 
     async viewSupplierDetails() {
         await this.btnViewMore.click();
+    
     }
 }
