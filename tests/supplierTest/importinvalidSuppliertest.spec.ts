@@ -43,5 +43,5 @@ test('TC_006 : Validate that the admin can successfully import existing supplier
     await addNewData.clickImportOneRow();
     await addNewData.clickDone();
     await addNewData.verifySupplierImportedMessage();
-
+    
 });
