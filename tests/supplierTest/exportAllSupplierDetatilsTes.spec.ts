@@ -2,8 +2,6 @@ import { test, expect } from '@playwright/test';
 import { adminLoginPage } from '../../pages/adminLoginPage/adminLoginPage';
 import { navigateSupplierPage } from '../../pages/supplier/navigateSupplierPage';
 
-
-
 test('TC_008 : Verify that the admin can successfully export all supplier details.', async ({ page }) => {
 
     await page.goto('/signin');
