@@ -79,5 +79,6 @@ export class approvalWorkFlowSupplierPage {
 
     async isRejectButtonVisible(): Promise<boolean> {
         return await this.btnReject.isVisible();
+        
     }
 }
