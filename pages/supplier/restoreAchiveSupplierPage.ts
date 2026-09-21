@@ -25,6 +25,7 @@ export class restoreArchiveSupplies {
         this.toastSCMRestored = page.getByRole('alert').filter({
             hasText: 'BOI Holding has been restored to Draft.'
         });
+        
     }
     // create action methods 
     async clickLblSupplier() {
