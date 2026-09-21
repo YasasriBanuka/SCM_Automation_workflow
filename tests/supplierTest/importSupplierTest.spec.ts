@@ -46,7 +46,7 @@ test('TC_005 :Validate that the admin can successfully import supplier details u
     await verifyValidData.clickDone();
     // verification message 
     await verifyValidData.verifySupplierImportedMessage();
-
+    
     await page.waitForTimeout(6000);
     
 });
