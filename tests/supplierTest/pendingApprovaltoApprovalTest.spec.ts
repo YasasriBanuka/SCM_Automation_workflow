@@ -44,5 +44,5 @@ test('TC_003 : Verify that the admin can successfully change the supplier status
     await expect(
         page.locator('tr').filter({ hasText: 'BOI Holding' }).getByText('Approved')
     ).toBeVisible();
-
+    
 });
