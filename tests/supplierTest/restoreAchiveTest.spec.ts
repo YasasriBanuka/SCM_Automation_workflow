@@ -28,5 +28,6 @@ test('TC_007 : Verify that the admin can successfully restore an archived suppli
     await restorArchive.verifySupplierRestoredMessage();
 
     await page.waitForTimeout(4000);
+    
 
 });
