@@ -44,4 +44,5 @@ export class supplierApprovePage {
     async clickApproveConfirm() {
         await this.btnApproveConfirm.click();
     }
+    
 }
