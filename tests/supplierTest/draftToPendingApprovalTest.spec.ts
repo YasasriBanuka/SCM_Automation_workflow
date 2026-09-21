@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 import { approvalWorkFlowSupplierPage } from '../../pages/supplier/approvalWorkFlowSupplierPage';
 import { adminLoginPage } from '../../pages/adminLoginPage/adminLoginPage';
 
-test('TC_002 : Verify that the admin can successfully change the supplier status from Draft to Pending Approval for BOI Holding', async ({ page }) => {
+test('TC_004 : Verify that the admin can successfully change the supplier status from Draft to Pending Approval for added supplier detilas', async ({ page }) => {
 
     await page.goto('/signin');
 
