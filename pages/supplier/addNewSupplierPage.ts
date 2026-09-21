@@ -202,6 +202,6 @@ export class addNewSupplier {
 
     async verifySupplierSavedMessage(){
        await expect (this.toastSuccessMessage).toContainText    
-       ('Supplier saved. It will appear in the list shortly.'); 
+       ('Supplier saved. It will appear in the list shortly.');  
     }
 }
