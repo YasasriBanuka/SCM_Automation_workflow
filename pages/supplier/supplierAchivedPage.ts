@@ -5,7 +5,7 @@ export class supplierAchived {
     readonly page: Page;
     readonly btnArchived: Locator;
     readonly txtareaComment: Locator;
-    readonly btnArchive: Locator; 
+    readonly btnArchive: Locator;
     readonly toastArchivedMessage: Locator;
 
     constructor(page: Page) {
@@ -25,12 +25,13 @@ export class supplierAchived {
     ) {
         await this.txtareaComment.fill(comment);
     }
-    async clickArchivebtn(){
+    async clickArchivebtn() {
         await this.btnArchive.click();
     }
     // verifycation
     async verifyArchivedMessage() {
-    await expect(this.toastArchivedMessage).toContainText('Supplier archived.');
-}
+        await expect(this.toastArchivedMessage).toContainText('Supplier archived.');
+
+    }
 
 }
