@@ -3,7 +3,7 @@ import { adminLoginPage } from "../../pages/adminLoginPage/adminLoginPage";
 import { archivedSupplierPage } from "../../pages/supplier/archivedSupplierPage";
 import { supplierAchived } from "../../pages/supplier/supplierAchivedPage";
 
-test('TC_003 : Verify that the admin can successfully archive a draft supplier details..', async ({ page }) => {
+test('TC_003 : Verify that the admin can successfully archive a draft supplier details.', async ({ page }) => {
 
     await page.goto('/signin');
 
