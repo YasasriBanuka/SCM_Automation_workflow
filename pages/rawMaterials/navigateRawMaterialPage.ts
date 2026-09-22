@@ -8,6 +8,8 @@ export class navigateRawMaterialPage {
     readonly btnAddRawMaterial: Locator;
     readonly btnImportRawMaterial: Locator;
     readonly btnExportRawMaterial: Locator;
+   
+
 
     constructor(page: Page) {
         this.page = page;
@@ -22,7 +24,6 @@ export class navigateRawMaterialPage {
     }
     async ClicklblRawMaterials() {
         await this.lblRawMaterials.click();
-
     }
     async clickbbtnAddRawMaterial(){
         await this.btnAddRawMaterial.click();
