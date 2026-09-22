@@ -10,6 +10,9 @@ export class AddRawMaterialData {
     readonly txtQCLeadTime: Locator;
     readonly btnaddMaterial: Locator;
     readonly toastSuccessMessage: Locator;
+    readonly txtItemCodeError: Locator;
+    readonly txtDessError: Locator;
+    readonly toastErrorMessage: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -21,6 +24,10 @@ export class AddRawMaterialData {
         this.txtQCLeadTime = page.getByRole("spinbutton", { name: "2" });
         this.btnaddMaterial = page.getByRole('button', { name: 'Create Raw Material', exact: true });
         this.toastSuccessMessage = page.getByRole('alert').filter({ hasText: 'Raw material created successfully.' })
+        this.txtItemCodeError = page.getByRole("alert").filter({ hasText: "Item code is required." });
+        this.txtDessError = page.getByRole("alert").filter({ hasText: "Description is required." });
+        // Duplicate data error message validation 
+        this.toastErrorMessage = page.getByRole('alert').filter({ hasText: 'Failed to create raw material.' });
     }
 
     async enterItemCode(
@@ -58,11 +65,23 @@ export class AddRawMaterialData {
     ) {
         await this.txtQCLeadTime.fill(leadTime);
     }
-     async clickAddMaterial() {
+    async clickAddMaterial() {
         await this.btnaddMaterial.click();
     }
 
     async verifyRawMaterial() {
         await expect(this.toastSuccessMessage).toBeVisible();
+    }
+
+    async verifyItemCodeRequiredError() {
+        await expect(this.txtItemCodeError).toBeVisible();
+        await expect(this.txtItemCodeError).toHaveText("Item code is required.");
+    }
+    async verifyDescriptionRequiredError() {
+        await expect(this.txtDessError).toBeVisible();
+        await expect(this.txtDessError).toHaveText("Description is required..");
+    }
+    async verifyRawMaterialCreationFailed() {
+        await expect(this.toastErrorMessage).toBeVisible();
     }
 }
