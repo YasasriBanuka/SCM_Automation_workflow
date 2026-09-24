@@ -23,7 +23,7 @@ test('TC_001 : Verify that an admin user can move to product section successfull
 
 })
 
-test.only('TC_002 : Verify that an admin user can add new product details successfully ', async ({ page }) => {
+test.('TC_003 : Verify that an admin user can add new product details successfully ', async ({ page }) => {
 
     await page.goto('/signin');
 
