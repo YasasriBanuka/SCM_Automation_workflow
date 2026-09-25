@@ -73,3 +73,54 @@ test('TC_002: Verify that an admin user can add new product details successfully
 
 
 })
+
+test('TC_003: Verify that an admin user can not add new product with already exist Item code', async ({ page }) => {
+
+    await page.goto('/signin');
+
+    const adminLogin = new adminLoginPage(page);
+    await adminLogin.enterUsername('admin.operations@companydemo.com');
+    await adminLogin.enterPassword('Admin@2026!');
+    await adminLogin.selectBranch();
+    await adminLogin.clickcheckbox();
+    await adminLogin.clickLogin();
+
+    const productPage = new navigateProduct(page);
+    // Navigate to Raw Materials
+
+    await productPage.clickProducts();
+
+    const addProduct = new addNewProduct(page);
+    await addProduct.enterProductInformation(
+        'PKG-BOX-M',
+        'Large Corrugated Box 30x20x15cm',
+        'Packaging'
+
+    );
+    await addProduct.selectUOM('PCS');
+
+    // Add data for Raw Material
+    await addProduct.addProduct1();
+    await addProduct.selectComponentItem('RM_001');
+    await addProduct.enterRawMaterialDetails(
+        '10',
+        '2',
+        'Corrugated packaging material'
+    );
+
+    await addProduct.addMaterial();
+
+    //add new Barcode 
+    await addProduct.clickAddBarcode();
+    await addProduct.enterBarcode('87123451');
+    await addProduct.selectBarcodeType('EAN8');
+
+    //Click Button 
+    await addProduct.clickSaveProduct();
+    await addProduct.verifyErrorProductSuccessMessage();
+   
+    await page.waitForTimeout(4000);
+
+
+
+})
