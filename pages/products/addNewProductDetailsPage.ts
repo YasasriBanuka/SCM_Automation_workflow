@@ -24,6 +24,7 @@ export class addNewProduct {
     readonly saveProductButton: Locator;
 
     readonly verifyAddMessage: Locator;
+    readonly verifyErrorMessage: Locator;
 
 
     constructor(page: Page) {
@@ -53,6 +54,8 @@ export class addNewProduct {
 
         //Verify add product message 
         this.verifyAddMessage = page.getByRole('alert').filter({ hasText: 'Product saved. It will appear in the list shortly.' })
+
+        this.verifyErrorMessage = page.getByRole('alert').filter({ hasText: 'Item code "PKG-BOX-M" already exists' })
     }
     //Add New Product action method
     async enterProductInformation(
@@ -108,7 +111,14 @@ export class addNewProduct {
     }
 
     async verifyAddProductSuccessMessage() {
-            await expect(this.verifyAddMessage).toBeVisible();
-            await expect(this.verifyAddMessage).toHaveText("Product saved. It will appear in the list shortly.");
-        }
+        await expect(this.verifyAddMessage).toBeVisible();
+        await expect(this.verifyAddMessage).toHaveText("Product saved. It will appear in the list shortly.");
+    }
+
+    async verifyErrorProductSuccessMessage() {
+        await expect(this.verifyErrorMessage).toBeVisible();
+        await expect(this.verifyErrorMessage).toHaveText('Item code "PKG-BOX-M" already exists');
+    }
+
+
 }
