@@ -1,17 +1,13 @@
 import { test } from '@playwright/test';
 import { navigateRawMaterialPage } from '../../pages/rawMaterials/navigateRawMaterialPage';
 import { adminLoginPage } from '../../pages/adminLoginPage/adminLoginPage';
+import { loginAsAdmin } from '../../utils/login';
 
 test('TC_004 : Verify that an admin can successfully Import the new Raw Material with valid details.', async ({ page }) => {
 
   await page.goto('/signin');
 
-  const adminLogin = new adminLoginPage(page);
-  await adminLogin.enterUsername('admin.operations@companydemo.com');
-  await adminLogin.enterPassword('Admin@2026!');
-  await adminLogin.selectBranch();
-  await adminLogin.clickcheckbox();
-  await adminLogin.clickLogin();
+  await loginAsAdmin(page);
 
   const rawMaterialPage = new navigateRawMaterialPage(page);
   // Navigate to Raw Materials
