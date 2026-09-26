@@ -2,6 +2,7 @@ import test from "@playwright/test";
 import { adminLoginPage } from "../../pages/adminLoginPage/adminLoginPage";
 import { navigateProduct } from "../../pages/products/navigateProductsPage";
 import { addNewProduct } from "../../pages/products/addNewProductDetailsPage";
+import { loginAsAdmin } from "../../utils/login";
 
 
 
@@ -9,17 +10,11 @@ test('TC_001 : Verify that an admin user can move to product section successfull
 
     await page.goto('/signin');
 
-    const adminLogin = new adminLoginPage(page);
-    await adminLogin.enterUsername('admin.operations@companydemo.com');
-    await adminLogin.enterPassword('Admin@2026!');
-    await adminLogin.selectBranch();
-    await adminLogin.clickcheckbox();
-    await adminLogin.clickLogin();
+    await loginAsAdmin(page);
 
     const supplierPage = new navigateProduct(page);
     // Navigate to Raw Materials
     await supplierPage.clickProducts();
-
 
 })
 
@@ -27,16 +22,10 @@ test('TC_002: Verify that an admin user can add new product details successfully
 
     await page.goto('/signin');
 
-    const adminLogin = new adminLoginPage(page);
-    await adminLogin.enterUsername('admin.operations@companydemo.com');
-    await adminLogin.enterPassword('Admin@2026!');
-    await adminLogin.selectBranch();
-    await adminLogin.clickcheckbox();
-    await adminLogin.clickLogin();
+    await loginAsAdmin(page);
 
     const productPage = new navigateProduct(page);
     // Navigate to Raw Materials
-
     await productPage.clickProducts();
 
     const addProduct = new addNewProduct(page);
@@ -44,7 +33,6 @@ test('TC_002: Verify that an admin user can add new product details successfully
         'PKG-BOX-M',
         'Large Corrugated Box 30x20x15cm',
         'Packaging'
-
     );
     await addProduct.selectUOM('PCS');
 
@@ -70,20 +58,13 @@ test('TC_002: Verify that an admin user can add new product details successfully
 
     await page.waitForTimeout(4000);
 
-
-
 })
 
 test('TC_003: Verify that an admin user can not add new product with already exist Item code', async ({ page }) => {
 
     await page.goto('/signin');
 
-    const adminLogin = new adminLoginPage(page);
-    await adminLogin.enterUsername('admin.operations@companydemo.com');
-    await adminLogin.enterPassword('Admin@2026!');
-    await adminLogin.selectBranch();
-    await adminLogin.clickcheckbox();
-    await adminLogin.clickLogin();
+    await loginAsAdmin(page);
 
     const productPage = new navigateProduct(page);
     // Navigate to Raw Materials
@@ -118,7 +99,7 @@ test('TC_003: Verify that an admin user can not add new product with already exi
     //Click Button 
     await addProduct.clickSaveProduct();
     await addProduct.verifyErrorProductSuccessMessage();
-   
+
     await page.waitForTimeout(4000);
 
 
