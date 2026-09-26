@@ -3,18 +3,14 @@ import { navigateRawMaterialPage } from '../../pages/rawMaterials/navigateRawMat
 import { adminLoginPage } from '../../pages/adminLoginPage/adminLoginPage';
 import { AddRawMaterialData } from '../../pages/rawMaterials/addRawMaterialData';
 import { changeRawMaterilaDetails } from '../../pages/rawMaterials/chnageAddedRawMatDetailsPage';
+import { loginAsAdmin } from '../../utils/login';
 
 
 test('TC_001 : Verify that an admin user can successfully create a new Raw Material with valid details.', async ({ page }) => {
 
   await page.goto('/signin');
 
-  const adminLogin = new adminLoginPage(page);
-  await adminLogin.enterUsername('admin.operations@companydemo.com');
-  await adminLogin.enterPassword('Admin@2026!');
-  await adminLogin.selectBranch();
-  await adminLogin.clickcheckbox();
-  await adminLogin.clickLogin();
+  await loginAsAdmin(page);
 
   const rawMaterialPage = new navigateRawMaterialPage(page);
   // Navigate to Raw Materials
@@ -43,12 +39,7 @@ test('TC_002 : Verify Item Code mandatory validation', async ({ page }) => {
 
   await page.goto('/signin');
 
-  const adminLogin = new adminLoginPage(page);
-  await adminLogin.enterUsername('admin.operations@companydemo.com');
-  await adminLogin.enterPassword('Admin@2026!');
-  await adminLogin.selectBranch();
-  await adminLogin.clickcheckbox();
-  await adminLogin.clickLogin();
+  await loginAsAdmin(page);
 
   const rawMaterialPage = new navigateRawMaterialPage(page);
   // Navigate to Raw Materials
@@ -75,11 +66,8 @@ test('TC_003 : Verify Description mandatory validation', async ({ page }) => {
   await page.goto('/signin');
 
   const adminLogin = new adminLoginPage(page);
-  await adminLogin.enterUsername('admin.operations@companydemo.com');
-  await adminLogin.enterPassword('Admin@2026!');
-  await adminLogin.selectBranch();
-  await adminLogin.clickcheckbox();
-  await adminLogin.clickLogin();
+
+  await loginAsAdmin(page);
 
   const rawMaterialPage = new navigateRawMaterialPage(page);
   // Navigate to Raw Materials
@@ -105,11 +93,8 @@ test.only('TC_04 : Verify duplicate Item Code', async ({ page }) => {
   await page.goto('/signin');
 
   const adminLogin = new adminLoginPage(page);
-  await adminLogin.enterUsername('admin.operations@companydemo.com');
-  await adminLogin.enterPassword('Admin@2026!');
-  await adminLogin.selectBranch();
-  await adminLogin.clickcheckbox();
-  await adminLogin.clickLogin();
+
+  await loginAsAdmin(page);
 
   const rawMaterialPage = new navigateRawMaterialPage(page);
   // Navigate to Raw Materials
@@ -136,12 +121,7 @@ test('TC_004: Verify admin can view and change added Raw Material Details', asyn
 
   await page.goto('/signin');
 
-  const adminLogin = new adminLoginPage(page);
-  await adminLogin.enterUsername('admin.operations@companydemo.com');
-  await adminLogin.enterPassword('Admin@2026!');
-  await adminLogin.selectBranch();
-  await adminLogin.clickcheckbox();
-  await adminLogin.clickLogin();
+  await loginAsAdmin(page);
 
   const rawMaterialPage = new navigateRawMaterialPage(page);
   // Navigate to Raw Materials
@@ -166,12 +146,7 @@ test('TC_005: Verify admin can view and deactivate added Raw Material Details', 
 
   await page.goto('/signin');
 
-  const adminLogin = new adminLoginPage(page);
-  await adminLogin.enterUsername('admin.operations@companydemo.com');
-  await adminLogin.enterPassword('Admin@2026!');
-  await adminLogin.selectBranch();
-  await adminLogin.clickcheckbox();
-  await adminLogin.clickLogin();
+  await loginAsAdmin(page);
 
   const rawMaterialPage = new navigateRawMaterialPage(page);
   // Navigate to Raw Materials
@@ -192,12 +167,7 @@ test('TC_006: Verify admin cannot deactivate a raw material used in a product', 
 
   await page.goto('/signin');
 
-  const adminLogin = new adminLoginPage(page);
-  await adminLogin.enterUsername('admin.operations@companydemo.com');
-  await adminLogin.enterPassword('Admin@2026!');
-  await adminLogin.selectBranch();
-  await adminLogin.clickcheckbox();
-  await adminLogin.clickLogin();
+  await loginAsAdmin(page);
 
   const rawMaterialPage = new navigateRawMaterialPage(page);
   // Navigate to Raw Materials
