@@ -37,7 +37,6 @@ export class addNewPriceList {
         this.toastPriceListSaved = page.getByRole('alert').filter({ hasText: 'Price list saved. Redirecting…' });
 
     }
-
     async enterPriceListName(priceListName: string) {
         await this.txtPriceListName.fill(priceListName);
     }
@@ -49,16 +48,11 @@ export class addNewPriceList {
     async selectCurrencyLKR() {
         await this.drpCurrencyType.click();
 
-        await this.page.getByRole('option', {
-            name: 'LKR',
-            exact: true
-        }).click();
+        await this.page.getByRole('option', { name: 'LKR', exact: true }).click();
     }
 
     async selectValidFromToday() {
-        const today = new Date()
-            .toISOString()
-            .split('T')[0];
+        const today = new Date().toISOString().split('T')[0];
 
         await this.btnValidFrom.fill(today);
     }
@@ -66,15 +60,9 @@ export class addNewPriceList {
     async selectValidToNextMonth30() {
         const today = new Date();
 
-        const nextMonth30 = new Date(
-            today.getFullYear(),
-            today.getMonth() + 1,
-            30
-        );
+        const nextMonth30 = new Date(today.getFullYear(), today.getMonth() + 1, 30);
 
-        const date = nextMonth30
-            .toISOString()
-            .split('T')[0];
+        const date = nextMonth30.toISOString().split('T')[0];
 
         await this.btnValidTo.fill(date);
     }
@@ -88,7 +76,6 @@ export class addNewPriceList {
 
         // Select matching item
         await this.page.getByRole('button', { name: new RegExp(itemCode) }).click();
-
 
     }
 
