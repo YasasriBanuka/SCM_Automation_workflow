@@ -58,3 +58,52 @@ test('TC_002: Verify that an admin user can add new priceList details successful
     await page.waitForTimeout(4000);
 
 })
+
+test('TC_003: Verify that an admin user can add new priceList details successfully without Price Lines', async ({ page }) => {
+
+    await page.goto('/signin');
+
+    await loginAsAdmin(page);
+
+    const productPage = new navigateProduct(page);
+    // Navigate to product pricelist section 
+    await productPage.clickPriceList();
+
+    const priceList = new addNewPriceList(page);
+
+    await priceList.enterPriceListName('Standard_Cosmetic_Price_List_2026');
+
+    // Enter Description
+    await priceList.enterDescription(
+        'Default price list for all Cosmetic customers -2026'
+    );
+
+    // Select Currency
+    await priceList.selectCurrencyLKR();
+    // Select Valid From - Today
+    await priceList.selectValidFromToday();
+    // Select Valid To - Next Month 30th
+    await priceList.selectValidToNextMonth30();
+
+    await priceList.clickSavePriceList();
+
+    await priceList.verifyPriceListSavedToast();
+
+    await page.waitForTimeout(4000);
+
+})
+
+test('TC_004: Verify that an admin user can export all added priceList details successfully', async ({ page }) => {
+
+    await page.goto('/signin');
+
+    await loginAsAdmin(page);
+
+    const productPage = new navigateProduct(page);
+    // Navigate to product pricelist section 
+    await productPage.btnclickPriceList();
+    await productPage.clicExportkPriceList();
+
+    await page.waitForTimeout(4000);
+
+})
