@@ -1,23 +1,18 @@
 import { test } from '@playwright/test';
-
 import { AddRawMaterialData } from '../../pages/rawMaterials/addRawMaterialData';
 import { changeRawMaterilaDetails } from '../../pages/rawMaterials/chnageAddedRawMatDetailsPage';
-
 import { loginAsAdmin } from '../../utils/login';
 import { addRawMaterial, fillRawMaterialWithoutDescription, fillRawMaterialWithoutItemCode, notdeactivateRawMaterial } from '../../utils/rawMaterialUtility';
-
 import { navigationFlow } from '../../pages/navigationFLow/siteNavigation';
 import { updateRawMaterialToPCS } from '../../utils/rawMaterialUtility';
 import { rawMaterialData } from '../../utils/testData';
 import { navigateRawMaterialPage } from '../../pages/rawMaterials/navigateRawMaterialPage';
-
 
 test('TC_001 : Verify that an admin user can successfully create a new Raw Material with valid details.', async ({ page }) => {
 
     await loginAsAdmin(page);
 
     const rawMaterialPage = new navigationFlow(page);
-
     // Navigate to Raw Materials
     await rawMaterialPage.clickLblRawMaterial();
     await rawMaterialPage.ClicklblRawMaterials();
@@ -25,7 +20,6 @@ test('TC_001 : Verify that an admin user can successfully create a new Raw Mater
     await rawMaterialPage.clickbbtnAddRawMaterial();
     // Add Raw Material using utility
     await addRawMaterial(page);
-
     const addRawMaterialPage = new AddRawMaterialData(page);
     await addRawMaterialPage.clickAddMaterial();
     await addRawMaterialPage.verifyRawMaterial();
@@ -34,9 +28,7 @@ test('TC_001 : Verify that an admin user can successfully create a new Raw Mater
 test('TC_002 : Verify Item Code mandatory validation', async ({ page }) => {
 
     await loginAsAdmin(page);
-
     const rawMaterialPage = new navigationFlow(page);
-  
     await rawMaterialPage.clickLblRawMaterial();
     await rawMaterialPage.ClicklblRawMaterials();
     await rawMaterialPage.clickbbtnAddRawMaterial();
@@ -93,9 +85,6 @@ test('TC_005: Verify duplicate Item Code', async ({ page }) => {
         rawMaterialData.itemCode
     );
 });
-
-
-
 test('TC_006 Verify admin can view and deactivate added Raw Material Details', async ({ page }) => {
 
     await loginAsAdmin(page);
