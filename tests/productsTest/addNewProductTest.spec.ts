@@ -30,7 +30,7 @@ test('TC_002: Verify that an admin user can add new product details successfully
 
     const addProduct = new addNewProduct(page);
     await addProduct.enterProductInformation(
-        'PKG-BOX-M',
+        'PKG-BOX-MLL',
         'Large Corrugated Box 30x20x15cm',
         'Packaging'
     );
@@ -49,7 +49,7 @@ test('TC_002: Verify that an admin user can add new product details successfully
 
     //add new Barcode 
     await addProduct.clickAddBarcode();
-    await addProduct.enterBarcode('87123451');
+    await addProduct.enterBarcode('87123423');
     await addProduct.selectBarcodeType('EAN8');
 
     //Click Button 
