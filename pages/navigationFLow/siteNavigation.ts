@@ -34,6 +34,7 @@ export class navigationFlow {
     readonly lblnavigateWarwehouse: Locator;
     readonly lblAddWarehouseLink: Locator;
     readonly btnAddWarehouse: Locator;
+    readonly btnWarehouseName: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -68,6 +69,7 @@ export class navigationFlow {
         this.lblnavigateWarwehouse = page.getByRole('button', { name: 'Warehouses', exact: true });
         this.lblAddWarehouseLink = page.getByRole('link', { name: 'Directory', exact: true });
         this.btnAddWarehouse = page.getByRole('button', { name: 'Add Warehouse', exact: true });
+        this.btnWarehouseName = page.locator('tbody tr');
     }
 
 
@@ -78,14 +80,14 @@ export class navigationFlow {
     async ClicklblDirectory() {
         await this.lblDirectory.click();
     }
-    async clickbtnAddSupplier(){
+    async clickbtnAddSupplier() {
         await this.btnAddSupplier.click();
     }
     async clickImportSupplier() {
         await this.btnImportSupplier.click();
     }
     async clickExportSupplier() {
-        await  this.btnExportSupplier.click();
+        await this.btnExportSupplier.click();
     }
 
     //Raw Materila
@@ -141,5 +143,18 @@ export class navigationFlow {
         await this.lblnavigateWarwehouse.click();
         await this.lblAddWarehouseLink.click();
         await this.btnAddWarehouse.click();
+    }
+
+    async viewAddWarehouse() {
+        await this.lblnavigateWarwehouse.click();
+        await this.lblAddWarehouseLink.click();
+    }
+
+    async selectWarehouse(warehouseName: string) {
+        await this.btnWarehouseName.filter({ hasText: warehouseName }).click();
+    }
+
+    async selectSecondWarehouse() {
+        await this.btnWarehouseName.nth(1).click();
     }
 }
