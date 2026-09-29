@@ -21,22 +21,11 @@ export class AddRawMaterialData {
         this.txtDescription = page.getByPlaceholder("Raw material name");
         this.txtPurchaseLeadTime = page.getByRole("spinbutton", { name: "7" });
         this.txtQCLeadTime = page.getByRole("spinbutton", { name: "2" });
-        this.btnaddMaterial = page.getByRole('button', {
-            name: 'Create Raw Material',
-            exact: true
-        });
+        this.btnaddMaterial = page.getByRole('button', { name: 'Create Raw Material', exact: true});
 
-        this.toastSuccessMessage = page.getByRole('alert').filter({
-            hasText: 'Raw material created successfully.'
-        });
-
-        this.txtItemCodeError = page.getByRole("alert").filter({
-            hasText: "Item code is required."
-        });
-
-        this.txtDessError = page.getByRole("alert").filter({
-            hasText: "Raw Material Name is required."
-        });
+        this.toastSuccessMessage = page.getByRole('alert').filter({hasText: 'Raw material created successfully.'});
+        this.txtItemCodeError = page.getByRole("alert").filter({ hasText: "Item code is required." });
+        this.txtDessError = page.getByRole("alert").filter({hasText: "Raw Material Name is required." });
     }
 
     async enterItemCode(itemCode: string) {
@@ -46,10 +35,7 @@ export class AddRawMaterialData {
     async selectUOM(uom: string) {
         await this.drpUOM.click();
 
-        await this.page.getByRole('option', {
-            name: uom,
-            exact: true
-        }).click();
+        await this.page.getByRole('option', { name: uom,exact: true }).click();
     }
 
     async enterDescription(description: string) {
