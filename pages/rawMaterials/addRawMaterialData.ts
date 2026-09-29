@@ -86,11 +86,13 @@ export class AddRawMaterialData {
         );
     }
 
-    async verifyRawMaterialCreationFailed(itemCode: string) {
-        const toastErrorMessage = this.page.getByRole('alert').filter({
-            hasText: `Item code "${itemCode}" already exists`
-        });
+    async verifyRawMaterialCreationFailed() {
+    const itemCode = await this.page.getByPlaceholder("RAW-MATERIAL-01").inputValue();
 
-        await expect(toastErrorMessage).toBeVisible();
-    }
+    const toastErrorMessage = this.page.getByRole('alert').filter({
+        hasText: `Item code "${itemCode}" already exists`
+    });
+
+    await expect(toastErrorMessage).toBeVisible();
+}
 }
