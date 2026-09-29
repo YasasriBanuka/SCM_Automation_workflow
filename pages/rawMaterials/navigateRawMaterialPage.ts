@@ -21,7 +21,7 @@ export class navigateRawMaterialPage {
         this.btnAddRawMaterial = page.getByRole('button', { name: 'Add Raw Material', exact: true });
         this.btnImportRawMaterial = page.getByRole('button', { name: 'Import' });
         this.btnExportRawMaterial = page.getByRole('button', { name: 'Export' });
-        this.clickValue = page.locator('tbody tr').filter({ hasText: 'RM_010' });
+        this.clickValue = page.locator('tbody tr').filter({ hasText: 'RM_020' });
         this.clickDeactivateValue = page.locator('tbody tr').filter({ hasText: 'RM_002' });
         this.clickCannotDeactivation = page.locator('tbody tr').filter({ hasText: 'RM_001' });
     }
