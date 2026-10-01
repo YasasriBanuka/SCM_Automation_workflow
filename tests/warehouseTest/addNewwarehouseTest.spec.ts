@@ -105,3 +105,22 @@ test('TC_005 : Verify that an Admin can update selected warehouse details with v
 
   await page.waitForTimeout(4000);
 });
+
+
+test('TC_005 : Verify that an Admin can deleted selected warehouse details', async ({ page }) => {
+
+  await page.goto('/signin');
+
+  await loginAsAdmin(page);
+
+  const addwarehouse = new navigationFlow(page);
+  await addwarehouse.viewAddWarehouse();
+
+  const addNewHouse = new addWarehouse(page);
+  await addNewHouse.deleteWarehouse('Matara WareHouse');
+  await addNewHouse.addComment('Warehouse is no longer in use');
+  await addNewHouse.clickDeactivateButton();
+  await addNewHouse.verifyWarehouseDeletedMessage();
+
+  await page.waitForTimeout(4000);
+});
