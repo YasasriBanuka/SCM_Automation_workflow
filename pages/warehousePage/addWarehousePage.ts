@@ -10,7 +10,9 @@ export class addWarehouse {
     readonly btnaddWarehouse: Locator;
     readonly warehouseCreatedToast: Locator;
     readonly warehouseSavedToast: Locator;
-
+    readonly btnSaveChanges: Locator;
+    readonly toastMessage:Locator;
+    //global variables
     constructor(page: Page) {
         this.page = page;
         this.txtWarehouseCode = page.getByPlaceholder('e.g. WH-COL-01');
@@ -19,7 +21,8 @@ export class addWarehouse {
         this.btnaddWarehouse = page.getByRole('button', { name: 'Save Warehouse', exact: true });
         this.warehouseCreatedToast = this.page.getByRole('alert').filter({ hasText: /Warehouse .+ created successfully\./ });
         this.warehouseSavedToast = page.getByText('Warehouse saved. It will appear in the list shortly.');
-    
+        this.btnSaveChanges = page.getByRole('button', { name: 'Save Changes',exact: true  });
+        this.toastMessage = page.getByRole('alert');
     }
 
     async enterWarehouseCode(Wcode: string) {
@@ -34,7 +37,7 @@ export class addWarehouse {
         await this.txtLocation.fill(WLocation);
     }
 
-    async clickAddButton(){
+    async clickAddButton() {
         await this.btnaddWarehouse.click();
     }
 
@@ -46,7 +49,7 @@ export class addWarehouse {
         console.log('Actual Message:', message);
 
         expect(message).toMatch(
-                /^Warehouse \S+ created successfully\.$/ //Verify the warehouse creation success message with a dynamic warehouse code.
+            /^Warehouse \S+ created successfully\.$/ //Verify the warehouse creation success message with a dynamic warehouse code.
 
         );
     }
@@ -60,9 +63,19 @@ export class addWarehouse {
         console.log('Warehouse saved toast message is displayed.');
 
     }
-
-
-
-
+    async updateWarehouse(warehouseName: string) {
+        await this.page
+            .getByRole('row').filter({ hasText: warehouseName }).getByRole('button', { name: 'Edit' }).click();
+    }
+    
+    async clickSaveChangesButton() {
+        await this.btnSaveChanges.click();
+    }
+    async verifyWarehouseUpdatedMessage() {
+    await expect(this.toastMessage).toContainText([
+        'Warehouse updated successfully.',
+        'Warehouse updated. Changes will appear in the list shortly.'
+    ]);
+}
 
 }
