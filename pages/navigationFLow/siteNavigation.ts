@@ -36,6 +36,13 @@ export class navigationFlow {
     readonly btnAddWarehouse: Locator;
     readonly btnWarehouseName: Locator;
 
+    // =============================Inventory Navigation=============================
+    readonly lblnavigateInventory: Locator;
+    readonly lblStockDashboardLink: Locator;
+    readonly btnNewTransaction: Locator;
+    readonly linkGoodsReceipt: Locator;
+    readonly cycleCountLink: Locator;
+
     constructor(page: Page) {
         this.page = page;
 
@@ -70,6 +77,13 @@ export class navigationFlow {
         this.lblAddWarehouseLink = page.getByRole('link', { name: 'Directory', exact: true });
         this.btnAddWarehouse = page.getByRole('button', { name: 'Add Warehouse', exact: true });
         this.btnWarehouseName = page.locator('tbody tr');
+
+        //Inventory
+        this.lblnavigateInventory = page.getByRole('button', { name: 'Inventory', exact: true });
+        this.lblStockDashboardLink = page.getByRole('link', { name: 'Stock Dashboard', exact: true });
+        this.btnNewTransaction = page.getByRole('button', { name: 'New Transaction', exact: true });
+        this.linkGoodsReceipt = page.getByRole('link', { name: 'Goods Receipt', exact: true });
+        this.cycleCountLink = page.getByRole('link', { name: 'Cycle Count', exact: true });
     }
 
 
@@ -157,4 +171,25 @@ export class navigationFlow {
     async selectSecondWarehouse() {
         await this.btnWarehouseName.nth(1).click();
     }
+
+    async clickInventory() {
+        await this.lblnavigateInventory.click();
+        await this.lblStockDashboardLink.click();
+        await this.btnNewTransaction.click();
+    }
+
+    async clickInventory1() {
+        await this.lblnavigateInventory.click();
+        await this.lblStockDashboardLink.click();
+    }
+    async clickGoodsReceipt() {
+        await this.lblnavigateInventory.click();
+        await this.linkGoodsReceipt.click();
+    }
+    async clickCycleCount() {
+        await this.lblnavigateInventory.click();
+        await this.cycleCountLink.click();
+    }
+
+
 }
