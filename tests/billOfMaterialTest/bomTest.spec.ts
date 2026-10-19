@@ -34,14 +34,14 @@ test('TC_002 : Verify that an admin user can add a new BOM details successfully 
     // Enter BOM details
     await addBom.enterdetails(
         'Standard assembly recipe',
-        250, 
+        250,
         'Any notes about this BOM…'
     );
     await addBom.clickSave();
     await addBom.verifySuccessMessage('BOM-2026-001');
 })
 
-test.only('TC_003 : Verify that an admin user can add a activate added BOM details successfully ', async ({ page }) => {
+test('TC_003 : Verify that an admin user can add a activate added BOM details successfully ', async ({ page }) => {
 
     await page.goto('/signin');
 
@@ -55,7 +55,7 @@ test.only('TC_003 : Verify that an admin user can add a activate added BOM detai
     await bomActivation.clickBom('BOM-2026-001');
     await bomActivation.clickActivate();
     await bomActivation.verifyBomActivatedMessage('BOM-2026-001');
-    await page.waitForTimeout(2000);     
+    await page.waitForTimeout(2000);
 
 })
 
