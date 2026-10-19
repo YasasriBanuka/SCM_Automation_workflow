@@ -6,8 +6,6 @@ import { inventoryReorderPage } from "../../pages/inventoryPage/inventoryReorder
 import { goodsReceiptPage } from "../../pages/inventoryPage/goodsReceiptPage";
 import { cycleCountPage } from "../../pages/inventoryPage/cycleCountPage";
 
-
-
 test("TC_001 : add new Post Transcation", async ({ page }) => {
     await page.goto('/signin');
 
@@ -64,6 +62,7 @@ test.only("TC_003 : Verify cycle count with valid data", async ({ page }) => {
     await cycleCount.filterByWarehouse();
     await cycleCount.enterCountedQuantity('90');
     await cycleCount.selectReason('Audit Correction');
+
  
     await page.waitForTimeout(4000);
 
