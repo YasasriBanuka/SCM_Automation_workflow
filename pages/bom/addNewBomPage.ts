@@ -77,6 +77,6 @@ export class addNewBom {
             this.page.locator('.Toastify__toast--success')
         ).toContainText(`BOM ${bomNo} activated.`);
 
-    
+
     }
 }
