@@ -43,6 +43,11 @@ export class navigationFlow {
     readonly linkGoodsReceipt: Locator;
     readonly cycleCountLink: Locator;
 
+ // =============================Bill of Material=============================
+    readonly lblnavigateBillOfMaterial: Locator;
+    readonly lblBillOfMaterialLink: Locator;
+    readonly btnAddBillOfMaterial: Locator;
+
     constructor(page: Page) {
         this.page = page;
 
@@ -84,6 +89,11 @@ export class navigationFlow {
         this.btnNewTransaction = page.getByRole('button', { name: 'New Transaction', exact: true });
         this.linkGoodsReceipt = page.getByRole('link', { name: 'Goods Receipt', exact: true });
         this.cycleCountLink = page.getByRole('link', { name: 'Cycle Count', exact: true });
+
+        //Bill of Material
+        this.lblnavigateBillOfMaterial = page.getByRole('button', { name: 'Bill of Materials', exact: true });
+        this.lblBillOfMaterialLink = page.getByRole('link', { name: 'All BOMs', exact: true });
+        this.btnAddBillOfMaterial = page.getByRole('button', { name: 'New BOM', exact: true });
     }
 
 
@@ -191,5 +201,15 @@ export class navigationFlow {
         await this.cycleCountLink.click();
     }
 
+    //Bill of Material
+    async clickBillOfMaterial() {
+        await this.lblnavigateBillOfMaterial.click();
+        await this.lblBillOfMaterialLink.click();
+    }
 
+    async clickAddBillOfMaterial() {
+        await this.clickBillOfMaterial();
+        await this.btnAddBillOfMaterial.click();
+        
+    }
 }
