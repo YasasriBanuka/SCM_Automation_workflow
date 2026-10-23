@@ -43,10 +43,21 @@ export class navigationFlow {
     readonly linkGoodsReceipt: Locator;
     readonly cycleCountLink: Locator;
 
- // =============================Bill of Material=============================
+    // =============================Bill of Material=============================
     readonly lblnavigateBillOfMaterial: Locator;
     readonly lblBillOfMaterialLink: Locator;
     readonly btnAddBillOfMaterial: Locator;
+
+    // =============================Logistics=============================
+
+    readonly lblLogistics: Locator;
+    readonly linkCarriers: Locator;
+    readonly btnAddCarrier: Locator;
+    readonly linkVehicle: Locator;
+    readonly btnAddVehicle: Locator;
+    readonly linkRoute: Locator;
+    readonly btnAddRoute: Locator;
+
 
     constructor(page: Page) {
         this.page = page;
@@ -94,8 +105,16 @@ export class navigationFlow {
         this.lblnavigateBillOfMaterial = page.getByRole('button', { name: 'Bill of Materials', exact: true });
         this.lblBillOfMaterialLink = page.getByRole('link', { name: 'All BOMs', exact: true });
         this.btnAddBillOfMaterial = page.getByRole('button', { name: 'New BOM', exact: true });
-    }
 
+        //Logistics
+        this.lblLogistics = page.getByRole('button', { name: 'Logistics', exact: true });
+        this.linkCarriers = page.getByRole('link', { name: 'Carriers', exact: true });
+        this.btnAddCarrier = page.getByRole('button', { name: 'Add Carrier', exact: true });
+        this.linkVehicle = page.getByRole('link', { name: 'Vehicles', exact: true });
+        this.btnAddVehicle = page.getByRole('button', { name: 'Add Vehicle', exact: true });
+        this.linkRoute = page.getByRole('link', { name: 'Routes', exact: true });
+        this.btnAddRoute = page.getByRole('button', { name: 'Create Route', exact: true });
+    }
 
     //Supplier 
     async clickLblSupplier() {
@@ -210,6 +229,51 @@ export class navigationFlow {
     async clickAddBillOfMaterial() {
         await this.clickBillOfMaterial();
         await this.btnAddBillOfMaterial.click();
-        
+
     }
+
+    //Logistics
+    async clickLogistics() {
+        await this.lblLogistics.click();
+    }
+
+    async clickCarriers() {
+        await this.clickLogistics();
+        await this.linkCarriers.click();
+        await this.btnAddCarrier.click();
+    }
+    async viewCarriers() {
+        await this.clickLogistics();
+        await this.linkCarriers.click();
+    }
+
+    async clickVehicle() {
+        await this.clickLogistics();
+        await this.linkVehicle.click();
+        await this.btnAddVehicle.click();
+    }
+
+    async clickSelectedVehicle(registrationNumber: string) {
+        await this.clickLogistics();
+        await this.linkVehicle.click();
+        const targetRow = this.page
+            .locator('tbody tr')
+            .filter({ has: this.page.getByText(registrationNumber, { exact: true })
+         });
+
+        await targetRow.click();
+    }
+
+    async clickRoute() {
+        await this.clickLogistics();
+        await this.linkRoute.click();
+        await this.btnAddRoute.click();
+    }
+
+    async viewRoute() {
+        await this.clickLogistics();
+        await this.linkRoute.click();
+    }
+
+
 }
