@@ -58,6 +58,10 @@ export class navigationFlow {
     readonly linkRoute: Locator;
     readonly btnAddRoute: Locator;
 
+    // =============================Customer=============================
+    readonly lblCustomer:Locator;
+    readonly linkDirectory:Locator;
+    readonly btnAddCustomer :Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -114,7 +118,12 @@ export class navigationFlow {
         this.btnAddVehicle = page.getByRole('button', { name: 'Add Vehicle', exact: true });
         this.linkRoute = page.getByRole('link', { name: 'Routes', exact: true });
         this.btnAddRoute = page.getByRole('button', { name: 'Create Route', exact: true });
-    }
+
+        //Customer
+        this.lblCustomer = page.getByRole('button',{name:'Customer',exact:true});
+        this.linkDirectory = page.getByRole('link',{name:'Directory',exact:true});
+        this.btnAddCustomer = page.getByRole('button',{name:'Add Customer',exact:true});
+;    }
 
     //Supplier 
     async clickLblSupplier() {
@@ -273,6 +282,18 @@ export class navigationFlow {
     async viewRoute() {
         await this.clickLogistics();
         await this.linkRoute.click();
+    }
+
+    // Customer
+    async clickCustomer(){
+        await this.lblCustomer.click();
+        await this.linkDirectory.click();
+    }
+
+     async AddCustomer(){
+        await this.clickCustomer();
+        await this.btnAddCustomer.click();
+        
     }
 
 
