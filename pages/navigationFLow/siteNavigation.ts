@@ -59,15 +59,21 @@ export class navigationFlow {
     readonly btnAddRoute: Locator;
 
     // =============================Customer=============================
-    readonly lblCustomer:Locator;
-    readonly linkDirectory:Locator;
-    readonly btnAddCustomer :Locator;
+    readonly lblCustomer: Locator;
+    readonly linkDirectory: Locator;
+    readonly btnAddCustomer: Locator;
+
+    // =============================Customer=============================
+    readonly lblComplaints: Locator;
+    readonly linkAllComplaints: Locator;
+    readonly btnNewComplaint: Locator;
+    readonly lblPortalLinks: Locator;
 
     constructor(page: Page) {
         this.page = page;
 
         //Supplier
-        this.lblSupplier = page.getByText('Suppliers', { exact: true });
+        this.lblSupplier = page.getByRole('button', { name: 'Suppliers', exact: true });
         this.lblDirectory = page.getByRole('link', { name: 'Directory', exact: true });
         this.btnAddSupplier = page.getByRole('button', { name: 'Add Supplier', exact: true });
         this.btnImportSupplier = page.getByRole('button', { name: 'Import' });
@@ -120,11 +126,16 @@ export class navigationFlow {
         this.btnAddRoute = page.getByRole('button', { name: 'Create Route', exact: true });
 
         //Customer
-        this.lblCustomer = page.getByRole('button',{name:'Customer',exact:true});
-        this.linkDirectory = page.getByRole('link',{name:'Directory',exact:true});
-        this.btnAddCustomer = page.getByRole('button',{name:'Add Customer',exact:true});
-;    }
+        this.lblCustomer = page.getByRole('button', { name: 'Customer', exact: true });
+        this.linkDirectory = page.getByRole('link', { name: 'Directory', exact: true });
+        this.btnAddCustomer = page.getByRole('button', { name: 'Add Customer', exact: true });
 
+        //Complaints & Issue Management
+        this.lblComplaints = page.getByRole('button', { name: 'Complaints & Issue Management', exact: true });
+        this.linkAllComplaints = page.getByRole('link', { name: 'All Complaints', exact: true });
+        this.btnNewComplaint = page.getByRole('button', { name: 'New Complaint', exact: true });
+        this.lblPortalLinks = page.getByRole('link', { name: 'Portal Links', exact: true });
+    }
     //Supplier 
     async clickLblSupplier() {
         await this.lblSupplier.click();
@@ -267,8 +278,9 @@ export class navigationFlow {
         await this.linkVehicle.click();
         const targetRow = this.page
             .locator('tbody tr')
-            .filter({ has: this.page.getByText(registrationNumber, { exact: true })
-         });
+            .filter({
+                has: this.page.getByText(registrationNumber, { exact: true })
+            });
 
         await targetRow.click();
     }
@@ -285,16 +297,40 @@ export class navigationFlow {
     }
 
     // Customer
-    async clickCustomer(){
+    async clickCustomer() {
         await this.lblCustomer.click();
         await this.linkDirectory.click();
     }
 
-     async AddCustomer(){
+    async AddCustomer() {
         await this.clickCustomer();
         await this.btnAddCustomer.click();
-        
     }
 
+    //Complaints
+    async addNewComplaints() {
+        await this.lblComplaints.click();
+        await this.linkAllComplaints.click();
+    }
 
+    async NewComplaints() {
+        await this.addNewComplaints();
+        await this.btnNewComplaint.click();
+
+    }
+
+    async clickSelectedComplaint(referancenNumber: string) {
+        await this.addNewComplaints()
+        const targetRow = this.page
+            .locator('tbody tr')
+            .filter({
+                has: this.page.getByText(referancenNumber, { exact: true })
+            });
+
+        await targetRow.click();
+    }
+    async clickPortalLinks() {
+        await this.lblComplaints.click();
+        await this.lblPortalLinks.click();
+    }
 }
