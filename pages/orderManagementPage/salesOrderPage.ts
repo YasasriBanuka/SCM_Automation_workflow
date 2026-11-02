@@ -37,6 +37,7 @@ export class addSalesOrder {
         this.optCustomer = page.getByRole('button', { name: /MacTiles Holdings/ });
 
         this.txtOrdTitle = page.getByPlaceholder('Q2 Supply Order — Lanka Retail');
+        
         this.btnCusPO = page.getByRole('button', { name: 'Select a customer PO reference', exact: true });
         this.txtCusPo = page.getByPlaceholder('Search purchase orders…');
         this.optCusPo = page.getByRole('button', { name: /PO-2026-0003/ });
