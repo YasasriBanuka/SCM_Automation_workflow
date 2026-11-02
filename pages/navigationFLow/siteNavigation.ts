@@ -69,6 +69,18 @@ export class navigationFlow {
     readonly btnNewComplaint: Locator;
     readonly lblPortalLinks: Locator;
 
+    // =============================Order Management=============================
+    readonly OrderManagement: Locator;
+    readonly linkOrders: Locator;
+    readonly btnSalesOrder: Locator;
+    readonly linkPickLists: Locator;
+    readonly btngenPickList: Locator;
+
+    readonly linkShipments: Locator;
+    readonly btnAddShipment: Locator;
+    
+    
+
     constructor(page: Page) {
         this.page = page;
 
@@ -135,6 +147,17 @@ export class navigationFlow {
         this.linkAllComplaints = page.getByRole('link', { name: 'All Complaints', exact: true });
         this.btnNewComplaint = page.getByRole('button', { name: 'New Complaint', exact: true });
         this.lblPortalLinks = page.getByRole('link', { name: 'Portal Links', exact: true });
+
+        //order Management 
+        this.OrderManagement = page.getByRole('button', { name: 'Order Management', exact: true });
+        this.linkOrders = page.getByRole('link', { name: 'Orders', exact: true });
+        this.linkPickLists = page.getByRole('link', { name: 'Pick Lists', exact: true });
+        this.linkShipments = page.getByRole('link', { name: 'Shipments', exact: true });
+        this.btnSalesOrder = page.getByRole('button', { name: 'New Sales Order', exact: true });
+        this.btngenPickList = page.getByRole('button', { name: 'Generate Pick List', exact: true });
+        this.btnAddShipment = page.getByRole('button', { name: 'Create Shipment', exact: true });
+
+
     }
     //Supplier 
     async clickLblSupplier() {
@@ -333,4 +356,62 @@ export class navigationFlow {
         await this.lblComplaints.click();
         await this.lblPortalLinks.click();
     }
+// order Management
+    async navigationOrderManagementAction() {
+        await this.OrderManagement.click();
+    }
+    async orderManagementAction() {
+        await this.navigationOrderManagementAction();
+        await this.linkOrders.click();
+        await this.btnSalesOrder.click();
+    }
+    async viewOrder(orderNumber: string){
+        await this.navigationOrderManagementAction();
+        await this.linkOrders.click();
+        const targetRow = this.page
+            .locator('tbody tr')
+            .filter({
+                has: this.page.getByText(orderNumber, { exact: true })
+            });
+
+        await targetRow.click();
+                 
+    }
+    async clickPickAction() {
+        await this.navigationOrderManagementAction();
+        await this.linkPickLists.click();
+        await this.btngenPickList.click();
+    }
+
+    async viewPickAction(pickNumber: string) {
+        await this.navigationOrderManagementAction();
+        await this.linkPickLists.click();
+        const targetRow = this.page
+            .locator('tbody tr')
+            .filter({
+                has: this.page.getByText(pickNumber, { exact: true })
+            });
+
+        await targetRow.click();
+    }
+
+    async clickShipmentAction() {
+        await this.navigationOrderManagementAction();
+        await this.linkShipments.click();
+        await this.btnAddShipment.click();  
+    }
+
+     async viewShipmentAction( shipmentNumber: string) {
+        await this.navigationOrderManagementAction();
+        await this.linkShipments.click();
+         const targetRow = this.page
+            .locator('tbody tr')
+            .filter({
+                has: this.page.getByText(shipmentNumber, { exact: true })
+            });
+
+        await targetRow.click();
+      
+    }
+
 }
