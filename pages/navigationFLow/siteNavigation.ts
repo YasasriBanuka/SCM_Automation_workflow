@@ -78,8 +78,13 @@ export class navigationFlow {
 
     readonly linkShipments: Locator;
     readonly btnAddShipment: Locator;
-    
-    
+
+    // =============================POs=============================
+    readonly lblPOs: Locator;
+    readonly linkPOs: Locator;
+    readonly btnAddPO: Locator;
+    readonly cliclbtnStart: Locator;
+    readonly clickbtnImport: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -157,6 +162,12 @@ export class navigationFlow {
         this.btngenPickList = page.getByRole('button', { name: 'Generate Pick List', exact: true });
         this.btnAddShipment = page.getByRole('button', { name: 'Create Shipment', exact: true });
 
+        //POs
+        this.lblPOs = page.getByRole('button', { name: 'Production', exact: true });
+        this.linkPOs = page.getByRole('link', { name: 'Production Orders', exact: true });
+        this.btnAddPO = page.getByRole('button', { name: 'New Production Order', exact: true });
+        this.cliclbtnStart = page.getByRole('button', { name: 'Start', exact: true });
+        this.clickbtnImport = page.getByRole('button', { name: 'Import', exact: true });
 
     }
     //Supplier 
@@ -356,7 +367,7 @@ export class navigationFlow {
         await this.lblComplaints.click();
         await this.lblPortalLinks.click();
     }
-// order Management
+    // order Management
     async navigationOrderManagementAction() {
         await this.OrderManagement.click();
     }
@@ -365,7 +376,7 @@ export class navigationFlow {
         await this.linkOrders.click();
         await this.btnSalesOrder.click();
     }
-    async viewOrder(orderNumber: string){
+    async viewOrder(orderNumber: string) {
         await this.navigationOrderManagementAction();
         await this.linkOrders.click();
         const targetRow = this.page
@@ -375,7 +386,7 @@ export class navigationFlow {
             });
 
         await targetRow.click();
-                 
+
     }
     async clickPickAction() {
         await this.navigationOrderManagementAction();
@@ -398,20 +409,49 @@ export class navigationFlow {
     async clickShipmentAction() {
         await this.navigationOrderManagementAction();
         await this.linkShipments.click();
-        await this.btnAddShipment.click();  
+        await this.btnAddShipment.click();
     }
 
-     async viewShipmentAction( shipmentNumber: string) {
+    async viewShipmentAction(shipmentNumber: string) {
         await this.navigationOrderManagementAction();
         await this.linkShipments.click();
-         const targetRow = this.page
+        const targetRow = this.page
             .locator('tbody tr')
             .filter({
                 has: this.page.getByText(shipmentNumber, { exact: true })
             });
 
         await targetRow.click();
-      
+
+    }
+    //POs
+    async clickPOAction() {
+        await this.lblPOs.click();
+        await this.linkPOs.click();
+    }
+    async addPOAction() {
+        await this.clickPOAction();
+        await this.btnAddPO.click();
+    }
+
+    async clickPOActions(poNumber: string) {
+        await this.clickPOAction();
+
+        const targetRow = this.page
+            .locator('tbody tr')
+            .filter({
+                has: this.page.getByText(poNumber, { exact: true })
+            });
+
+        await targetRow.getByRole('button', {
+            name: 'Start',
+            exact: true
+        }).click();
+    }
+
+    async clickImportPO() {    
+        await this.clickPOAction();
+        await this.clickbtnImport.click();
     }
 
 }
