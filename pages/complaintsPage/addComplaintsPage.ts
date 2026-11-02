@@ -36,6 +36,7 @@ export class addComplaints {
         this.drpsalesOrder = page.getByRole('button', { name: 'Select sales order…' });
         this.txtSearchSales = page.getByPlaceholder('Search sales orders...');
         this.optSalesOrder = page.getByRole('button', { name: /SO-2026-0001/ });
+        
         this.drpShipment = page.getByRole('button', { name: 'Select shipment…' });
         this.txtSearchShipment = page.getByPlaceholder('Search shipments...');
         this.optShipment = page.getByRole('button', { name: /SHP-2026-0001/ });
