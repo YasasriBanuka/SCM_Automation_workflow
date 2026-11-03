@@ -23,7 +23,7 @@ export class addMrp {
         this.btnWarehouse = page.getByRole('button', { name: 'Scope to a single warehouse…', exact: true });
         this.optColombo = page.locator('button').filter({hasText: 'Colombo_01 (WH_001)'});
         this.txtNote = page.getByPlaceholder('Optional notes for this planning run…');
-        this.btnRunMrp = page.getByRole('button',{name:'Run MRP',exact:true});Udpa
+        this.btnRunMrp = page.getByRole('button',{name:'Run MRP',exact:true});
     }
     async createMrp() {
         await this.txtSearchBOM.fill('BOM-2026-001');
