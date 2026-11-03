@@ -86,6 +86,11 @@ export class navigationFlow {
     readonly cliclbtnStart: Locator;
     readonly clickbtnImport: Locator;
 
+    // =============================MRP Runs=============================
+    readonly lblMrp: Locator;
+    readonly linkMrRuns: Locator;
+    readonly btnNewMRPRun : Locator;
+
     constructor(page: Page) {
         this.page = page;
 
@@ -168,6 +173,11 @@ export class navigationFlow {
         this.btnAddPO = page.getByRole('button', { name: 'New Production Order', exact: true });
         this.cliclbtnStart = page.getByRole('button', { name: 'Start', exact: true });
         this.clickbtnImport = page.getByRole('button', { name: 'Import', exact: true });
+
+        //MRP Runs
+        this.lblMrp = page.getByRole('button', { name: 'MRP', exact: true });
+        this.linkMrRuns = page.getByRole('link', { name: 'MRP Runs', exact: true });
+        this.btnNewMRPRun = page.getByRole('button',{name:'New MRP Run',exact:true});
 
     }
     //Supplier 
@@ -449,9 +459,21 @@ export class navigationFlow {
         }).click();
     }
 
-    async clickImportPO() {    
+    async clickImportPO() {
         await this.clickPOAction();
         await this.clickbtnImport.click();
+    }
+    async clickMrp(){
+        await this.lblMrp.click();
+        await this.linkMrRuns.click(); 
+    }
+    async createMrp(){
+        await this.clickMrp();
+        await this.btnNewMRPRun.click();
+    }
+    async RunMrp(){
+        await this.lblMrp.click();
+        
     }
 
 }
