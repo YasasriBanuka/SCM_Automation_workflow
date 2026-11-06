@@ -89,7 +89,15 @@ export class navigationFlow {
     // =============================MRP Runs=============================
     readonly lblMrp: Locator;
     readonly linkMrRuns: Locator;
-    readonly btnNewMRPRun : Locator;
+    readonly btnNewMRPRun: Locator;
+
+
+    // =============================Project Management =============================
+    readonly lblPM: Locator;
+    readonly linkPm: Locator;
+    readonly btnPm: Locator;
+    readonly linkPhase:Locator;
+    readonly linkLabourRate: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -177,7 +185,14 @@ export class navigationFlow {
         //MRP Runs
         this.lblMrp = page.getByRole('button', { name: 'MRP', exact: true });
         this.linkMrRuns = page.getByRole('link', { name: 'MRP Runs', exact: true });
-        this.btnNewMRPRun = page.getByRole('button',{name:'New MRP Run',exact:true});
+        this.btnNewMRPRun = page.getByRole('button', { name: 'New MRP Run', exact: true });
+
+        //PM
+        this.lblPM = page.getByRole('button', { name: 'Project Management', exact: true });
+        this.linkPm = page.getByRole('link', { name: 'Projects', exact: true });
+        this.btnPm = page.getByRole('button', { name: 'New Project', exact: true });
+        this.linkLabourRate = page.getByRole('link', { name: 'Labour Rates', exact: true });
+        this.linkPhase =  page.getByRole('button',{name:'Phases',exact:true});
 
     }
     //Supplier 
@@ -244,7 +259,6 @@ export class navigationFlow {
     async clicExportkPriceList() {
         await this.btnExport.click();
     }
-
     // Warehouse 
     async navigateToAddWarehouse() {
         await this.lblnavigateWarwehouse.click();
@@ -463,17 +477,43 @@ export class navigationFlow {
         await this.clickPOAction();
         await this.clickbtnImport.click();
     }
-    async clickMrp(){
+    async clickMrp() {
         await this.lblMrp.click();
-        await this.linkMrRuns.click(); 
+        await this.linkMrRuns.click();
     }
-    async createMrp(){
+    async createMrp() {
         await this.clickMrp();
         await this.btnNewMRPRun.click();
     }
-    async RunMrp(){
+    async RunMrp() {
         await this.lblMrp.click();
-        
     }
+
+    async clickproject() {
+        await this.lblPM.click();
+        await this.linkPm.click();
+    }
+    async createProject() {
+        await this.clickproject();
+        await this.btnPm.click();
+    }
+
+    async addNewphases(projectNo: string) {
+
+        await this.clickproject();
+        const targetRow = this.page
+            .locator('tbody tr')
+            .filter({
+                has: this.page.getByText(projectNo, { exact: true })
+            });
+        await targetRow.click();
+        await this.linkPhase.click();
+    }
+    
+    async clickLabourRate() {
+        await this.lblPM.click();
+        await this.linkLabourRate.click();
+    }
+
 
 }
