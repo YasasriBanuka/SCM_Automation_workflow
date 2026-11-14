@@ -98,6 +98,7 @@ export class navigationFlow {
     readonly btnPm: Locator;
     readonly linkPhase:Locator;
     readonly linkLabourRate: Locator;
+    readonly btnAddRate: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -191,9 +192,9 @@ export class navigationFlow {
         this.lblPM = page.getByRole('button', { name: 'Project Management', exact: true });
         this.linkPm = page.getByRole('link', { name: 'Projects', exact: true });
         this.btnPm = page.getByRole('button', { name: 'New Project', exact: true });
-        this.linkLabourRate = page.getByRole('link', { name: 'Labour Rates', exact: true });
         this.linkPhase =  page.getByRole('button',{name:'Phases',exact:true});
-
+        this.linkLabourRate = page.getByRole('link', { name: 'Labour Rates', exact: true });
+        this.btnAddRate = page.getByRole('button', {name: 'Add Rate',exact: true });
     }
     //Supplier 
     async clickLblSupplier() {
@@ -513,6 +514,7 @@ export class navigationFlow {
     async clickLabourRate() {
         await this.lblPM.click();
         await this.linkLabourRate.click();
+        await this.btnAddRate.click();
     }
 
 
