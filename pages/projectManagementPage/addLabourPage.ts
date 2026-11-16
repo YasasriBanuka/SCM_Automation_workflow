@@ -16,6 +16,10 @@ export class addLabour {
     readonly btnSaveData: Locator;
     readonly txtErrorMessage: Locator;
 
+    readonly btnApprove: (workerName: string) => Locator;
+
+
+
     constructor(page: Page) {
         this.page = page;
         this.btnLabour = page.getByRole('button', { name: 'Labour', exact: true });
@@ -31,6 +35,12 @@ export class addLabour {
         this.btnSaveData = page.getByRole('button', { name: 'Log Hours', exact: true }).last();
         this.txtErrorMessage = page.getByRole('alert');
 
+        this.btnApprove = (workerName: string) => {
+            return this.page.locator('tr').filter({ hasText: workerName }).getByRole('button', {
+                name: 'Approve',
+                exact: true
+            });
+        };
     }
 
     async addaLabourDetials() {
@@ -49,6 +59,23 @@ export class addLabour {
         await this.txtLabourDescription.fill('Labour work for user registration functionality development.');
         await this.btnSaveData.click();
         await expect(this.txtErrorMessage).toContainText('Labour logs and material issues can only be added to active projects');
+    }
+    async addedLabourDetials() {
+
+        await this.btnLabour.click();
+        await this.btnLogHours.click();
+        await this.txtSearchUser.fill('Ya');
+        await this.page.getByText('Yasasri Banuka Dias Wimalaweera', { exact: true }).click();
+        await this.btnSelectTask.click();
+        await this.page.getByRole('option', { name: 'TSK-0001 · Develop User Registration Functionality', exact: true }).click();
+        await this.txtWorkDate.fill('2026-11-20');
+        await this.txtHours.fill('8');
+        await this.btnRateSource.click();
+        await this.page.getByRole('option', { name: 'Manual override', exact: true }).click();
+        await this.txtHourlyRate.fill('2500');
+        await this.txtLabourDescription.fill('Labour work for user registration functionality development.');
+        await this.btnSaveData.click();
+
     }
 
     async addLabourDetials() {
@@ -69,4 +96,13 @@ export class addLabour {
         await this.btnSaveData.click();
         await expect(this.txtErrorMessage).toContainText('Labour logs and material issues can only be added to active projects');
     }
+
+    async clickLabour() {
+        await this.btnLabour.click();
+    }
+    async clickApprove(workerName: string) {
+        await this.clickLabour();
+        await this.btnApprove(workerName).click();
+    }
+
 }
