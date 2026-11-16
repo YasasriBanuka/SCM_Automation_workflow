@@ -140,8 +140,6 @@ test('TC_008: Verify that an admin can add a new sub task after click the create
 
 });
 
-
-
 test('TC_009: Verify that an admin can add a new dependency by clicking the Task Dependencies icon.', async ({ page }) => {
 
     await page.goto('/signin');
@@ -201,7 +199,51 @@ test('TC_012: Verify that an admin cannot add a new log of hours to an inactive 
 
 });
 
-test('TC_013: Verify that an admin can add a new material issue ', async ({ page }) => {
+test('TC_013: Verify that an admin can Activate the create project', async ({ page }) => {
+
+    await page.goto('/signin');
+
+    await loginAsAdmin(page);
+    const posPage = new navigationFlow(page);
+    await posPage.addNewphases('PRJ-2026-0007');
+
+    const projectActive = new addNewProject(page);
+    await projectActive.clickbtnActivate();
+
+     await page.waitForTimeout(4000);
+
+});
+test('TC_014: Verify that an admin can add a new log of hours to an active project. [Manual Override]', async ({ page }) => {
+
+    await page.goto('/signin');
+
+    await loginAsAdmin(page);
+    const posPage = new navigationFlow(page);
+    await posPage.addNewphases('PRJ-2026-0007');
+
+    const addNewLabour= new addLabour(page);
+     await addNewLabour.addedLabourDetials();
+
+     await page.waitForTimeout(4000);
+
+});
+
+test('TC_015: Verify that an admin can approve the added log details', async ({ page }) => {
+
+    await page.goto('/signin');
+
+    await loginAsAdmin(page);
+    const posPage = new navigationFlow(page);
+    await posPage.addNewphases('PRJ-2026-0007');
+
+    const addNewLabour= new addLabour(page);
+    await addNewLabour.clickApprove('Yasasri Banuka Dias Wimalaweera');
+
+     await page.waitForTimeout(4000);
+
+});
+
+test('TC_016: Verify that an admin can add a new material issue ', async ({ page }) => {
 
     await page.goto('/signin');
 
@@ -216,7 +258,7 @@ test('TC_013: Verify that an admin can add a new material issue ', async ({ page
 
 });
 
-test('TC_014: Verify that an admin can upload a new Documents ', async ({ page }) => {
+test('TC_017: Verify that an admin can upload a new Documents ', async ({ page }) => {
 
     await page.goto('/signin');
 
@@ -231,7 +273,7 @@ test('TC_014: Verify that an admin can upload a new Documents ', async ({ page }
 
 });
 
-test.only('TC_015: Verify that an admin can new Labour Rates ', async ({ page }) => {
+test('TC_018: Verify that an admin can new Labour Rates ', async ({ page }) => {
 
     await page.goto('/signin');
 
