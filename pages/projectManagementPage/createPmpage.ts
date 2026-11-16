@@ -14,23 +14,33 @@ export class addNewProject {
     readonly amountInput: Locator;
     readonly currencyDropdown: Locator;
     readonly projectNote: Locator;
-    readonly successToast:Locator;
-    readonly btnCreateProject:Locator;
+    readonly successToast: Locator;
+    readonly btnCreateProject: Locator;
+
+    readonly btnActivate: Locator;
+    readonly txtComment: Locator;
+    readonly btnActive :Locator;
+
 
     constructor(page: Page) {
         this.page = page;
         this.pName = page.getByPlaceholder('e.g. Downtown Office Fit-out');
         this.pType = page.getByRole('button', { name: 'Construction' });
         this.selectType = page.getByRole('option', { name: 'IT', exact: true });
-        this.addPm =  page.locator('input[placeholder="Search users (min 2 chars)…"]');
-        this.selectPm = page.getByRole('button', {name: /Yasasri Banuka Dias Wimalaweera/});
+        this.addPm = page.locator('input[placeholder="Search users (min 2 chars)…"]');
+        this.selectPm = page.getByRole('button', { name: /Yasasri Banuka Dias Wimalaweera/ });
         this.startDateInput = page.locator('input[type="date"]').nth(0);
         this.endDateInput = page.locator('input[type="date"]').nth(1);
         this.amountInput = page.locator('input[placeholder="0.00"]');
         this.currencyDropdown = page.getByRole('button', { name: 'LKR', exact: true });
         this.projectNote = page.getByPlaceholder('Optional notes about the project scope…');
         this.successToast = page.locator('.Toastify__toast--success');
-        this.btnCreateProject = page.getByRole('button',{name:'Create Project',exact:true});
+        this.btnCreateProject = page.getByRole('button', { name: 'Create Project', exact: true });
+
+        this.btnActivate = page.getByRole('button', { name: 'Activate', exact: true });
+        this.txtComment = page.getByTestId('confirm-modal-comment-textarea');
+        this.btnActive = page.getByRole('button', { name: 'Activate', exact: true }).last();
+
     }
 
     async createProject() {
@@ -48,4 +58,11 @@ export class addNewProject {
         await this.btnCreateProject.click();
         await expect(this.successToast).toContainText('Project created successfully.');
     }
+
+    async clickbtnActivate() {
+        await this.btnActivate.click();
+        await this.txtComment.fill('Project activated successfully.');
+        await this.btnActive .click();
+    }
+
 }
