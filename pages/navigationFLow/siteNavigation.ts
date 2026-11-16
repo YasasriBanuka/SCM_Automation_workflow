@@ -96,9 +96,15 @@ export class navigationFlow {
     readonly lblPM: Locator;
     readonly linkPm: Locator;
     readonly btnPm: Locator;
-    readonly linkPhase:Locator;
+    readonly linkPhase: Locator;
     readonly linkLabourRate: Locator;
     readonly btnAddRate: Locator;
+
+    // =============================Staff Task =============================
+    readonly lblSt: Locator;
+    readonly btnTeams: Locator;
+    readonly btnTask: Locator;
+
 
     constructor(page: Page) {
         this.page = page;
@@ -192,9 +198,15 @@ export class navigationFlow {
         this.lblPM = page.getByRole('button', { name: 'Project Management', exact: true });
         this.linkPm = page.getByRole('link', { name: 'Projects', exact: true });
         this.btnPm = page.getByRole('button', { name: 'New Project', exact: true });
-        this.linkPhase =  page.getByRole('button',{name:'Phases',exact:true});
+        this.linkPhase = page.getByRole('button', { name: 'Phases', exact: true });
         this.linkLabourRate = page.getByRole('link', { name: 'Labour Rates', exact: true });
-        this.btnAddRate = page.getByRole('button', {name: 'Add Rate',exact: true });
+        this.btnAddRate = page.getByRole('button', { name: 'Add Rate', exact: true });
+
+        //staff task 
+        this.lblSt = page.getByRole('link', { name: 'Staff Tasks', exact: true });
+        this.btnTeams = page.getByRole('button', { name: 'Teams', exact: true });
+        this.btnTask = page.getByRole('button', { name: ' Create Task', exact: true });
+
     }
     //Supplier 
     async clickLblSupplier() {
@@ -510,12 +522,30 @@ export class navigationFlow {
         await targetRow.click();
         await this.linkPhase.click();
     }
-    
+
     async clickLabourRate() {
         await this.lblPM.click();
         await this.linkLabourRate.click();
         await this.btnAddRate.click();
     }
 
+    async navigateStaffTask() {
+        await this.lblSt.click();
+        await this.btnTeams.click();
+    }
+    async createStaffTask() {
+        await this.lblSt.click();
+        await this.btnTask.click();
+    }
 
+    async viewTask(TaskNumber: string) {
+        await this.lblSt.click();
+        const targetRow = this.page
+            .locator('tbody tr')
+            .filter({
+                has: this.page.getByText(TaskNumber, { exact: true })
+            });
+
+        await targetRow.click();
+    }
 }
